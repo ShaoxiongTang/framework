@@ -1,0 +1,82 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.demo</groupId>
+  <artifactId>kafka-base</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+
+  <name>kafka-base</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- <hbase.version>0.94.2-cdh4.2.1</hbase.version> -->
+    <hbase.version>0.94.2</hbase.version>
+	<!-- <hadoop-common.version>2.0.0-cdh4.3.0</hadoop-common.version> -->
+	<hadoop-common.version>2.6.0</hadoop-common.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+		<groupId>org.apache.hadoop</groupId>
+		<artifactId>hadoop-common</artifactId>
+		<version>${hadoop-common.version}</version>
+	</dependency>
+    
+    <dependency>
+		<groupId>org.apache.hadoop</groupId>
+		<artifactId>hadoop-hdfs</artifactId>
+		<version>${hadoop-common.version}</version>
+	</dependency>
+    
+    <dependency>
+		<groupId>org.apache.hadoop</groupId>
+		<artifactId>hadoop-client</artifactId>
+		<version>${hadoop-common.version}</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.apache.hadoop</groupId>
+		<artifactId>hadoop-mapreduce-client-core</artifactId>
+		<version>${hadoop-common.version}</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.apache.hadoop</groupId>
+		<artifactId>hadoop-yarn-common</artifactId>
+		<version>${hadoop-common.version}</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.apache.hadoop</groupId>
+		<artifactId>hadoop-yarn-api</artifactId>
+		<version>${hadoop-common.version}</version>
+	</dependency>
+	
+    <dependency>
+		<groupId>org.apache.hbase</groupId>
+		<artifactId>hbase</artifactId>
+		<version>${hbase.version}</version>
+		<exclusions> 
+			<exclusion>
+				<groupId>org.apache.zookeeper</groupId>
+				<artifactId>zookeeper</artifactId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.kafka</groupId>
+		<artifactId>kafka_2.11</artifactId>
+		<version>0.9.0.0</version>
+	</dependency>
+  </dependencies>
+</project>

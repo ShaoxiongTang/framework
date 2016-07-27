@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:ldap="http://www.springframework.org/schema/ldap"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+	http://www.springframework.org/schema/util
+	http://www.springframework.org/schema/util/spring-util-2.0.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.2.xsd
+	http://www.springframework.org/schema/ldap 
+    http://www.springframework.org/schema/ldap/spring-ldap.xsd
+	http://www.springframework.org/schema/tx   
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://code.alibabatech.com/schema/dubbo  
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+       
+       
+   <context:component-scan base-package="com.demo.dubbo.server.serviceimpl"/>
+   
+   <context:property-placeholder location="classpath:config.properties"/>
+   
+   <dubbo:application name="helloService-app" />
+   
+   <dubbo:registry  protocol="zookeeper"  address="127.0.0.1:2181"  />
+   
+   <dubbo:service interface="com.demo.dubbo.service.HelloService" ref="helloService" />
+   
+   <bean id="helloService" class="com.demo.dubbo.server.serviceimpl.HelloServiceImpl"/>
+   
+   <dubbo:service interface="com.demo.dubbo.service.SumService" ref="sumService"/>
+   
+   <bean id="sumService" class="com.demo.dubbo.server.serviceimpl.SumServiceImpl"/>
+	
+</beans>

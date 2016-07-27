@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true" scanPeriod="30 seconds" >
+
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} %level %thread %logger %msg%n"/>
+    
+    <property name="LOG_DIR" value="/var/log/springmvc" /> 
+
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+            <fileNamePattern>${LOG_DIR}/%d{yyyy-MM-dd}/info-log.log</fileNamePattern>  
+            <maxHistory>60</maxHistory>  
+        </rollingPolicy>  
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>  
+    </appender>  
+
+    <root level="INFO">
+        <appender-ref ref="INFO"/>
+    </root>
+
+</configuration>

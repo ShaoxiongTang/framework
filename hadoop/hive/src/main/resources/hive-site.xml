@@ -1,0 +1,228 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+
+	<!-- Hive Configuration can either be stored in this file or in the hadoop configuration files  -->
+	<!-- that are implied by Hadoop setup variables.                                                -->
+	<!-- Aside from Hadoop setup variables - this file is provided as a convenience so that Hive    -->
+	<!-- users do not have to edit hadoop configuration files (that may be managed as a centralized -->
+	<!-- resource).                                                                                 -->
+
+	<!-- Hive Execution Parameters -->
+	<property>
+		<name>datanucleus.autoCreateSchema</name>
+		<value>false</value>
+	</property>
+
+	<property>
+		<name>datanucleus.autoCreateColumns</name>
+		<value>true</value>
+	</property>
+
+	<property>
+		<name>datanucleus.fixedDatastore</name>
+		<value>true</value>
+	</property>
+
+	<property>
+		<name>datanucleus.autoStartMechanism</name>
+		<value>SchemaTable</value>
+	</property>
+
+	<property>
+		<name>hive.metastore.uris</name>
+		<value>thrift://NM-ITC-NF8460M3-303-020:9083</value>
+		<description>IP address (or fully-qualified domain name) and port of the metastore host</description>
+	</property>
+
+
+	<property>
+		<name>hive.metastore.schema.verification</name>
+		<value>true</value>
+	</property>
+
+	<property>
+		<name>javax.jdo.option.ConnectionURL</name>
+		<value>jdbc:mysql://10.142.78.39:3306/hive?characterEncoding=UTF-8</value>
+	</property>
+	<property>
+		<name>javax.jdo.option.ConnectionDriverName</name>
+		<value>com.mysql.jdbc.Driver</value>
+	</property>
+	<property>
+		<name>javax.jdo.option.ConnectionUserName</name>
+		<value>hive</value>
+	</property>
+	<property>
+		<name>javax.jdo.option.ConnectionPassword</name>
+		<value>hive123!</value>
+	</property>
+
+	<property>
+		<name>hive.metastore.warehouse.dir</name>
+		<value>/user/hive/warehouse</value>
+		<description>Hive warehouse directory</description>
+	</property>
+
+	<property>
+		<name>mapreduce.jobtracker.address</name>
+		<value>ignorethis</value>
+	</property>
+
+	<property>
+		<name>io.compression.codecs</name>
+		<value>org.apache.hadoop.io.compress.SnappyCodec</value>
+	</property>
+	<property>
+		<name>mapreduce.output.fileoutputformat.compress.codec</name>
+		<value>org.apache.hadoop.io.compress.SnappyCodec</value>
+	</property>
+	<property>
+		<name>mapreduce.output.fileoutputformat.compress.type</name>
+		<value>BLOCK</value>
+	</property>
+	<property>
+		<name>hive.exec.show.job.failure.debug.info</name>
+		<value>true</value>
+		<description>
+			If a job fails, whether to provide a link in the CLI to the task with the
+			most failures, along with debugging hints if applicable.
+		</description>
+	</property>
+
+	<property>
+		<name>hive.security.authorization.enabled</name>
+		<value>true</value>
+		<description>enable or disable the hive client authorization</description>
+	</property>
+
+	<property>
+		<name>hive.metastore.authorization.storage.checks</name>
+		<value>true</value>
+	</property>
+
+	<property>
+		<name>hive.security.authorization.createtable.owner.grants</name>
+		<value>ALL</value>
+		<description>the privileges automatically granted to the owner whenever a table gets created.
+			An example like "select,drop" will grant select and drop privilege to the owner of the table</description>
+	</property>
+
+	<property>
+		<name>hive.security.authorization.createtable.role.grants</name>
+		<value>role_guest:select</value>
+		<description>role security</description>
+	</property>
+
+	<property>
+		<name>hive.hwi.listen.host</name>
+		<value>0.0.0.0</value>
+		<description>This is the host address the Hive Web Interface will listen on</description>
+	</property>
+
+	<property>
+		<name>hive.hwi.listen.port</name>
+		<value>9999</value>
+		<description>This is the port the Hive Web Interface will listen on</description>
+	</property>
+
+	<property>
+		<name>hive.cli.print.header</name>
+		<value>true</value>
+	</property>
+
+	<property>
+		<name>hive.aux.jars.path</name>
+		<value>file:///usr/lib/hive/lib/hive-hbase-handler-1.1.0-cdh5.4.7.jar,file:///usr/lib/zookeeper/zookeeper-3.4.5-cdh5.4.7.jar</value>
+	</property>
+
+	<property>
+		<name>hive.support.concurrency</name>
+		<description>Enable Hive's Table Lock Manager Service</description>
+		<value>true</value>
+	</property>
+
+	<property>
+		<name>hive.zookeeper.quorum</name>
+		<description>Zookeeper quorum used by Hive's Table Lock Manager</description>
+		<value>NM-304-HW-XH628V3-BIGDATA-086,NM-304-HW-XH628V3-BIGDATA-087,NM-304-HW-XH628V3-BIGDATA-088</value>
+	</property>
+
+	<property>
+		<name>hive.zookeeper.client.port</name>
+		<value>2181</value>
+	</property>
+
+	<property>
+		<name>hive.server2.thrift.port</name>
+		<value>10000</value>
+		<description>TCP port number to listen on, default 10000</description>
+	</property>
+
+	<property>
+		<name>hive.metastore.execute.setugi</name>
+		<value>true</value>
+		<description>the privileges automatically granted to the owner whenever a table gets created.
+			An example like "select,drop" will grant select and drop privilege to the owner of the table</description>
+	</property>
+
+	<property>
+		<name>hive.metastore.client.socket.timeout</name>
+		<value>60</value>
+		<description>MetaStore Client socket timeout in seconds</description>
+	</property>
+
+	<property>
+		<name>hive.server2.map.fair.scheduler.queue</name>
+		<value>false</value>
+	</property>
+
+	<property>
+		<name>hive.security.authorization.task.factory</name>
+		<value>org.apache.hadoop.hive.ql.parse.authorization.HiveAuthorizationTaskFactoryImpl</value>
+	</property>
+
+	<property>
+		<name>hive.default.fileformat</name>
+		<value>orc</value>
+	</property>
+
+	<property>
+		<name>hive.auto.convert.join</name>
+		<value>false</value>
+	</property>
+
+	<property>
+		<name>javax.jdo.option.ConnectionURL</name>
+		<value>jdbc:mysql://10.142.78.39:3306/hive?characterEncoding=UTF-8</value>
+	</property>
+	<property>
+		<name>javax.jdo.option.ConnectionDriverName</name>
+		<value>com.mysql.jdbc.Driver</value>
+	</property>
+	<property>
+		<name>javax.jdo.option.ConnectionUserName</name>
+		<value>hive</value>
+	</property>
+	<property>
+		<name>javax.jdo.option.ConnectionPassword</name>
+		<value>hive123!</value>
+	</property>
+</configuration>

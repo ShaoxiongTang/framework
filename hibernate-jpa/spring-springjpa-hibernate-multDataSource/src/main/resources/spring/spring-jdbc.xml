@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+	http://www.springframework.org/schema/util
+	http://www.springframework.org/schema/util/spring-util-2.0.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.2.xsd
+	http://www.springframework.org/schema/tx   
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/data/jpa
+    http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd">
+       
+    
+    <context:property-placeholder location="classpath:properties/jdbc.properties"/>
+    
+     <!-- 配置数据源 -->
+     <bean id="dataSource1"   
+        class="com.mchange.v2.c3p0.ComboPooledDataSource"   
+        destroy-method="close">   
+        <property name="driverClass">   
+            <value>${jdbc1.driverClass}</value>   
+        </property>   
+        <property name="jdbcUrl">   
+            <value>${jdbc1.url}</value>   
+        </property>   
+        <property name="user">   
+            <value>${jdbc1.user}</value>   
+        </property>   
+        <property name="password">   
+            <value>${jdbc1.password}</value>   
+        </property>   
+        <!--连接池中保留的最小连接数。-->   
+        <property name="minPoolSize">   
+            <value>${jdbc1.minPoolSize}</value>   
+        </property>   
+        <!--连接池中保留的最大连接数。Default: 15 -->   
+        <property name="maxPoolSize">   
+            <value>${jdbc1.maxPoolSize}</value>   
+        </property>   
+        <!--初始化时获取的连接数，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->   
+        <property name="initialPoolSize">   
+            <value>${jdbc1.initialPoolSize}</value>   
+        </property>   
+    </bean>
+    
+     <!-- 配置数据源 -->
+     <bean id="dataSource2"   
+        class="com.mchange.v2.c3p0.ComboPooledDataSource"   
+        destroy-method="close">   
+        <property name="driverClass">   
+            <value>${jdbc2.driverClass}</value>   
+        </property>   
+        <property name="jdbcUrl">   
+            <value>${jdbc2.url}</value>   
+        </property>   
+        <property name="user">   
+            <value>${jdbc2.user}</value>   
+        </property>   
+        <property name="password">   
+            <value>${jdbc2.password}</value>   
+        </property>   
+        <!--连接池中保留的最小连接数。-->   
+        <property name="minPoolSize">   
+            <value>${jdbc2.minPoolSize}</value>   
+        </property>   
+        <!--连接池中保留的最大连接数。Default: 15 -->   
+        <property name="maxPoolSize">   
+            <value>${jdbc2.maxPoolSize}</value>   
+        </property>   
+        <!--初始化时获取的连接数，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->   
+        <property name="initialPoolSize">   
+            <value>${jdbc2.initialPoolSize}</value>   
+        </property>   
+    </bean>
+    
+    <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+	    <property name="database" value="MYSQL"/>
+	    <property name="showSql" value="true"/>
+	    <property name="generateDdl" value="true"/>
+	    <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect"/>
+	</bean>
+    
+    <bean id="entityManagerFactory1" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource1"/>
+		<property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+		<property name="packagesToScan" value="com.demo.entity"/>
+	</bean>
+	
+	<bean id="entityManagerFactory2" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource2"/>
+		<property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+		<property name="packagesToScan" value="com.demo.entity"/>
+		<property name="persistenceUnitName" value="test2"/>
+	</bean>
+	
+	<bean id="transactionManager1" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory1"></property>
+	</bean>
+	
+	<bean id="transactionManager2" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory2"></property>
+	</bean>
+ 
+</beans>
